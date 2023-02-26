@@ -1,0 +1,2 @@
+class NayaxRetailLTD:
+    pass
