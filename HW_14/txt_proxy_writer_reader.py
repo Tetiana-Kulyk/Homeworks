@@ -19,5 +19,9 @@ class TxtProxyWriterReader:
 
     def write_to_file(self):
         self.__is_actual = False
-        self.__txt_writer.write(input())
-        return self.read_file()
+        new_data = input()
+        if new_data == self.__result:
+            raise Exception("This file already contains this data. Please send new data.")
+        else:
+            self.__txt_writer.write(new_data)
+            return self.read_file()
