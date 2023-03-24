@@ -1,21 +1,21 @@
 import pytest
-
-from human import Human
+import random
+from homeTask15.human import Human
+gender = ["male", "female"]
 
 
 @pytest.fixture()
 def create_human():
-    return Human("Daisy", 25, "female")
+    return Human("Alex", 25, random.choice(gender))
 
 
 @pytest.fixture()
 def create_human_over_age_limit():
-    return Human("Daisy", 100, "female")
+    return Human("Alex", 100, random.choice(gender))
+
 
 @pytest.fixture()
 def create_dead_human():
-    human = Human("Daisy", 100, "female")
+    human = Human("Alex", 100, random.choice(gender))
     human.grow()
     return human
-
-

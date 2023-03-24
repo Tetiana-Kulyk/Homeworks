@@ -3,13 +3,12 @@ import pytest
 
 class TestHuman:
 
-
     @pytest.mark.positive
     def test_increase_age(self, create_human):
         human = create_human
+        expected_age = human.age + 1
         human.grow()
         actual_age = human.age
-        expected_age = 26
         assert actual_age == expected_age, "The human age is not increased."
 
     @pytest.mark.negative
@@ -29,9 +28,13 @@ class TestHuman:
     @pytest.mark.positive
     def test_change_gender(self, create_human):
         human = create_human
-        human.change_gender("male")
+        if human.gender == "male":
+            human.change_gender("female")
+            expected_gender = "female"
+        elif human.gender == "female":
+            human.change_gender("male")
+            expected_gender = "male"
         actual_gender = human.gender
-        expected_gender = "male"
         assert actual_gender == expected_gender, "The human gender is not changed."
 
     @pytest.mark.negative
@@ -50,7 +53,7 @@ class TestHuman:
     def test_change_gender_to_existed(self, create_human):
         human = create_human
         with pytest.raises(Exception):
-            human.change_gender("female"), "Already existing gender can be set."
+            human.change_gender(human.gender), "Already existing gender can be set."
 
     @pytest.mark.positive
     def test_get_age(self, create_human):
@@ -63,5 +66,4 @@ class TestHuman:
     def test_get_gender(self, create_human):
         human = create_human
         actual_gender = human.gender
-        expected_gender = "female"
-        assert actual_gender == expected_gender, "Returned gender is not equal to human gender."
+        assert actual_gender, "The gender of the human is not returned."
