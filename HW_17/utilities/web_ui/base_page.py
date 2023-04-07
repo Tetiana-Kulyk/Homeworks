@@ -1,5 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains as AC
 
 
 class BasePage:
@@ -9,6 +10,9 @@ class BasePage:
 
     def _wait_until_element_located(self, locator):
         return self.__wait.until(EC.visibility_of_element_located(locator))
+
+    def _find_in_dom(self, locator):
+        return self.__wait.until(EC.presence_of_element_located(locator))
 
     def _wait_until_to_be_clickable(self, locator):
         return self.__wait.until(EC.element_to_be_clickable(locator))
@@ -21,3 +25,14 @@ class BasePage:
 
     def _click(self, locator):
         self._wait_until_to_be_clickable(locator).click()
+
+    def _is_page_opened(self, locator):
+        page = self.__wait.until(EC.visibility_of_element_located(locator))
+        return page.is_displayed()
+
+    def _is_selected(self, locator):
+        self.driver.refresh()
+        return self.__wait.until(EC.element_attribute_to_include(locator=locator, attribute_='checked'))
+
+    def _is_element_disappeared(self, locator):
+        return self.__wait.until(EC.invisibility_of_element_located(locator=locator))

@@ -1,7 +1,8 @@
 import configparser
-import os
+from constants import ROOT_DIR
 
-abs_path = os.path.join('../configurations/configuration.ini')
+
+abs_path = f'{ROOT_DIR}/configurations/configuration.ini'
 config = configparser.RawConfigParser()
 config.read(abs_path)
 
@@ -17,3 +18,5 @@ def get_user_creds():
 
 def get_browser_id():
     return config.get('browser_data', 'browser_id')
+
+
