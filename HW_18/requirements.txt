@@ -1,0 +1,5 @@
+pytest==7.3.0
+selenium==4.8.3
+
+dict2xml~=1.7.3
+constants==2023.2.0
