@@ -1,0 +1,6 @@
+pytest==7.3.0
+selenium==4.8.3
+
+dict2xml~=1.7.3
+constants~=0.6.0
+requests~=2.28.2
